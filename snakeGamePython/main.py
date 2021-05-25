@@ -3,9 +3,9 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-import time
 import pygame
 from pygame.locals import *
+import time
 
 
 class Snake:
@@ -14,6 +14,7 @@ class Snake:
         self.block = pygame.image.load("resources/block.jpg").convert()
         self.x = 100
         self.y = 100
+        self.direction = 'up'
 
     def draw(self):
         self.parent_screen.fill((110, 110, 5))
@@ -21,19 +22,30 @@ class Snake:
         pygame.display.flip()
 
     def move_left(self):
-        self.x -=10
+        self.direction = "left"
         self.draw()
 
     def move_right(self):
-        self.x +=10
+        self.direction = "right"
         self.draw()
 
     def move_up(self):
-        self.y -=10
+        self.direction = "up"
         self.draw()
 
     def move_down(self):
-        self.y +=10
+        self.direction = "down"
+        self.draw()
+
+    def walk(self):
+        if self.direction == "up":
+            self.y -= 10
+        if self.direction == "down":
+            self.y += 10
+        if self.direction == "left":
+            self.x -= 10
+        if self.direction == "right":
+            self.x += 10
         self.draw()
 
 
@@ -69,6 +81,11 @@ class Game:
                 elif event.type == QUIT:
                     running = False
 
+            self.snake.walk()
+            time.sleep(.2)
+
+
+
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -77,7 +94,7 @@ def print_hi(name):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    #print_hi('PyCharm')
 
     game = Game()
     game.run()
