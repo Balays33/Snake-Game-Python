@@ -9,6 +9,22 @@ import time
 
 SIZE =40
 
+
+class Apple:
+    def __init__(self, parent_screen):
+        self.parent_screen = parent_screen
+        self.image = pygame.image.load("resources/apple.jpg").convert()
+        self.x = SIZE*3
+        self.y = SIZE*3
+
+    def draw(self):
+        self.parent_screen.blit(self.image, (self.x, self.y))
+        pygame.display.flip()
+
+    def move(self):
+        self.x
+
+
 class Snake:
     def __init__(self, parent_screen, length):
         self.length = length
@@ -16,7 +32,7 @@ class Snake:
         self.block = pygame.image.load("resources/block.jpg").convert()
         self.x = [SIZE]*length
         self.y = [SIZE]*length
-        self.direction = 'up'
+        self.direction = 'down'
 
     def draw(self):
         self.parent_screen.fill((110, 110, 5))
@@ -63,7 +79,23 @@ class Game:
         self.surface = pygame.display.set_mode((1000, 1000))
         self.surface.fill((110, 110, 5))
         self.snake=Snake(self.surface, 6)
+        self.apple = Apple(self.surface)
         self.snake.draw()
+        self.apple.draw()
+
+    def is_collision(self, x1, y1, x2, y2):
+        if x1 >= x2 and x1 <= x2 + SIZE:
+            if y1 >= y2 and y1 <= y2 +SIZE:
+                return True
+        return False
+
+    def play(self):
+        self.snake.walk()
+        self.apple.draw()
+
+        if self.is_collision(self.snake.x[0], self.snake.y[0], self.apple.x, self.apple.y):
+            #print("collision")
+            self.apple.move()
 
     def run(self):
         running = True
@@ -89,7 +121,8 @@ class Game:
                 elif event.type == QUIT:
                     running = False
 
-            self.snake.walk()
+            self.play()
+
             time.sleep(.2)
 
 
