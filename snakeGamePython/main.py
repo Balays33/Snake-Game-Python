@@ -41,7 +41,7 @@ class Snake:
     def increase_length(self):
         self.length +=1
         self.x.append(-1)
-        self.y.append((-1))
+        self.y.append(-1)
 
     def draw(self):
         self.parent_screen.fill((110, 110, 5))
