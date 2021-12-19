@@ -2,3 +2,4 @@
  Snake-Game-Python
  
  ![alt text](https://github.com/Balays33/Snake-Game-Python/blob/main/pygame.JPG?raw=true)
+  ![alt text](https://github.com/Balays33/Snake-Game-Python/blob/main/pygame2.JPG?raw=true)
